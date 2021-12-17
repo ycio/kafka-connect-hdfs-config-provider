@@ -43,8 +43,10 @@ public class HdfsConfigProvider implements org.apache.kafka.common.config.provid
 
         Map<String, String> data = new HashMap<>();
         for(String key : properties.stringPropertyNames()) {
-            String value = properties.getProperty(key);
-            data.put(key, value);
+            if (keys.contains(key)) {
+                String value = properties.getProperty(key);
+                data.put(key, value);
+            }
         }
 
         return new ConfigData(data);
